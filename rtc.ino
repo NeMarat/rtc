@@ -7,17 +7,17 @@
  
 RTC_DS1307 RTC;
 /* заполнение значений по-умолчанию: если внесено прошедшее время, при первом включении будет срабатывание */
-unsigned long nextTime = 10; 
+unsigned long nextTime = 1405628477; /*unixtime следующего включения*/
 byte interval = 4;       /* интервал в днях */
 int active_time = 1200; /* продолжительность включенного состояния */
 int cur_time;
 bool cur_state = false;
-DateTime nowTime = RTC.now();
  
 void setup () {
-    Serial.begin(57600);
+    //Serial.begin(57600);
     Wire.begin();
     RTC.begin();
+    DateTime nowTime = RTC.now();
     pinMode(POMP_PIN, OUTPUT);
     digitalWrite(POMP_PIN, HIGH);
     
@@ -33,7 +33,7 @@ void setup () {
     }
  
   if (! RTC.isrunning()) {
-    Serial.println("RTC is NOT running!");
+    //Serial.println("RTC is NOT running!");
     // following line sets the RTC to the date & time this sketch was compiled
     //RTC.adjust(DateTime(__DATE__, __TIME__));
   }
@@ -41,7 +41,7 @@ void setup () {
 }
  
 void loop () {
-    nowTime = RTC.now();
+    DateTime nowTime = RTC.now();
     
     if (cur_state == true) {
       cur_time++;  /* предполагается задержка между проходами цикла в одну секунду */
@@ -60,29 +60,8 @@ void loop () {
         cur_time = 0;
     }
 /*
-    Serial.print("next day ");
-    Serial.print(nextDay, DEC);
-    Serial.print("; ");
-    Serial.print("cur_time ");
-    Serial.print(cur_time, DEC);
-    Serial.print("; ");
-    Serial.print("active_time ");
-    Serial.print(active_time, DEC);
-    Serial.println();
-    
-    Serial.print(now.year(), DEC);
-    Serial.print('/');
-    Serial.print(now.month(), DEC);
-    Serial.print('/');
-    Serial.print(now.day(), DEC);
-    Serial.print(' ');
-    Serial.print(now.hour(), DEC);
-    Serial.print(':');
-    Serial.print(now.minute(), DEC);
-    Serial.print(':');
-    Serial.print(now.second(), DEC);
-    Serial.println();
-*/  
+    Serial.println(nowTime.unixtime(), DEC);
+*/ 
     delay(1000);
 
 }

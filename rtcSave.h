@@ -29,8 +29,6 @@ int readInt(byte address, RTC_DS1307 * r) {
   int l = 0;
   *((byte*)&l + 0) = r->readnvram(address + 0);
   *((byte*)&l + 1) = r->readnvram(address + 1);
-  *((byte*)&l + 2) = r->readnvram(address + 2);
-  *((byte*)&l + 3) = r->readnvram(address + 3);
   return l;
 }
 

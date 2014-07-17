@@ -8,7 +8,7 @@
 #define LENGTH_ACT_ADDR 6
 #define NEXT_CRC_ADDR 8
 
-#define NEXT_CRC_VAL 107
+#define NEXT_CRC_VAL 227
 
 
 #endif
